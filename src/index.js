@@ -2,12 +2,13 @@ const express = require('express');
 const router = express();
 const cors = require('cors')
 const { User, Lending } = require('../models');
+const apiUrl = import.meta.env.VITE_API_URL;
 const userAndLendingController = require('../src/controllers/userAndLendingController')
 router.use(cors());
 router.use(express.json());
 
 
-router.post('/createUserBeforeLending', async (req, res) => {
+router.post(`${apiUrl}/createUserBeforeLending'`, async (req, res) => {
   const { cpf, uf, dataNascimento, valorEmprestimo, valorPagoPorMes } = req.body;
   console.log(req.body)
   if (valorEmprestimo < 50000) {
@@ -52,11 +53,11 @@ router.post('/createUserBeforeLending', async (req, res) => {
   }
 });
 
-router.get('/user-list', userAndLendingController.listUsers)
+router.get(`${apiUrl}/user-list`, userAndLendingController.listUsers)
 
-router.get('/lending-list', userAndLendingController.listLendings)
+router.get(`${apiUrl}/lending-list`, userAndLendingController.listLendings)
 
-router.get('/approvedLending-list', userAndLendingController.listApprovedLendings)
+router.get(`${apiUrl}/approvedLending-list`, userAndLendingController.listApprovedLendings)
 
 
 
