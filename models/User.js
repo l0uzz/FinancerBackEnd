@@ -1,49 +1,49 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    id: { 
+    id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true 
+      primaryKey: true
     },
-    cpf: { 
+    cpf: {
       type: DataTypes.STRING(11),
       unique: true,
-      allowNull: false 
+      allowNull: false
     },
-    uf: { 
+    uf: {
       type: DataTypes.STRING(2),
-      allowNull: false 
+      allowNull: false
     },
-    dataNascimento: { 
+    dataNascimento: {
       type: DataTypes.DATEONLY,
-      allowNull: false 
+      allowNull: false
     },
-    valorEmprestimo: { 
+    valorEmprestimo: {
       type: DataTypes.INTEGER,
-      allowNull: false 
+      allowNull: false
     },
-    valorPagoPorMes: { 
+    valorPagoPorMes: {
       type: DataTypes.INTEGER,
-      allowNull: false 
+      allowNull: false
     },
-    createdAt: { 
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
       field: 'created_at'
     },
-    updatedAt: { 
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
-      field: 'created_at'
+      field: 'updated_at'
     }
   }, {
-    tableName: 'Users',
+    tableName: 'users',
     timestamps: true
   });
 
-  User.associate = function(models) {
+  User.associate = function (models) {
     User.hasMany(models.Lending, { foreignKey: 'user_id' });
   };
 

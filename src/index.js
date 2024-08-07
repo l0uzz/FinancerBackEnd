@@ -8,7 +8,8 @@ router.use(express.json());
 
 
 router.post('/createUserBeforeLending', async (req, res) => {
-  const { cpf, uf, dataNascimento, valorEmprestimo, valorPagoPorMes, created_at, updated_at } = req.body;
+  const { cpf, uf, dataNascimento, valorEmprestimo, valorPagoPorMes } = req.body;
+  console.log(req.body)
   if (valorEmprestimo < 50000) {
     return res.status(400).json({ error: 'O valor do empréstimo deve ser maior ou igual a 50000.' });
   }
@@ -20,8 +21,6 @@ router.post('/createUserBeforeLending', async (req, res) => {
       dataNascimento,
       valorEmprestimo,
       valorPagoPorMes,
-      created_at,
-      updated_at
     });
 
     const saldoDevedor = valorEmprestimo;
@@ -44,8 +43,6 @@ router.post('/createUserBeforeLending', async (req, res) => {
       saldoDevedorAjustado,
       valorParcela,
       vencimento,
-      created_at,
-      updated_at
     });
 
     return res.status(201).json({ user, lending });
